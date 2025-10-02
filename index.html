@@ -45,7 +45,7 @@
         <div class="bg-white rounded-2xl shadow-lg p-6 md:p-10">
             <header class="text-center mb-8">
                 <h1 class="text-3xl md:text-4xl font-bold text-gray-900">Advocate AI Prompt Assistant</h1>
-                <p class="text-gray-600 mt-2">Paste the customer's message below to get the best AI prompt recipe. Please ensure that there is no PII or PHI in your submission. </p>
+                <p class="text-gray-600 mt-2">Paste the customer's message below to get the best AI prompt recipe. Please ensure there is PII or PHI in our submission.</p>
             </header>
 
             <main>
@@ -80,16 +80,7 @@
             </main>
         </div>
         <footer class="text-center mt-6">
-            <div class="w-full max-w-md mx-auto">
-                <label for="api-key" class="text-sm text-gray-600">Gemini API Key</label>
-                <div class="flex items-center gap-2 mt-1">
-                    <input type="password" id="api-key" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-indigo-500" placeholder="Enter your API key here">
-                    <button id="save-key-btn" class="bg-gray-200 text-gray-700 font-semibold py-2 px-4 text-sm rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400">Save</button>
-                </div>
-                 <p class="text-xs text-gray-500 mt-2">Your key is saved in your browser's local storage and is never shared.</p>
-                 <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-xs text-indigo-600 hover:underline">Get your Gemini API Key here</a>
-            </div>
-            <p class="text-sm text-gray-500 mt-4">Powered by the Gemini API</p>
+            <p class="text-sm text-gray-500">Powered by the Gemini API</p>
         </footer>
     </div>
 
@@ -100,8 +91,6 @@
         const loadingEl = document.getElementById('loading');
         const errorMessageEl = document.getElementById('error-message');
         const recommendationsEl = document.getElementById('prompt-recommendations');
-        const apiKeyInput = document.getElementById('api-key');
-        const saveKeyBtn = document.getElementById('save-key-btn');
 
         // This is the playbook content from the user's document.
         const playbookContent = `
@@ -168,7 +157,8 @@
               Task: Draft a concise and sincere apology. Validate their frustration and confirm that we are aware of a major outage. State that our team's top priority is fixing it. Do not make excuses. State that you will personally provide them with an update as soon as you have one.
               Constraints: Keep the message under 100 words. Do not promise a specific time-to-fix.
         `;
-
+        
+        // --- Main function to get recommendations from the API ---
         const getRecommendations = async (customerQuestion, apiKey) => {
             loadingEl.classList.remove('hidden');
             recommendationsEl.innerHTML = '';
@@ -258,6 +248,7 @@
             }
         };
         
+        // --- Function to handle copying text to clipboard ---
         window.copyToClipboard = (elementId, feedbackId) => {
             const textarea = document.getElementById(elementId);
             textarea.select();
@@ -276,34 +267,14 @@
                 console.error('Failed to copy text: ', err);
             }
         }
-
-        const saveApiKey = () => {
-            const apiKey = apiKeyInput.value.trim();
-            if (apiKey) {
-                localStorage.setItem('geminiApiKey', apiKey);
-                alert('API Key saved successfully!');
-            }
-        };
-
-        const loadApiKey = () => {
-            const savedKey = localStorage.getItem('geminiApiKey');
-            if (savedKey) {
-                apiKeyInput.value = savedKey;
-            }
-        };
-
-        saveKeyBtn.addEventListener('click', saveApiKey);
-
+        
+        // --- Event listener for the main button ---
         getPromptBtn.addEventListener('click', () => {
-            const customerQuestion = customerQuestionEl.value.trim();
-            const apiKey = apiKeyInput.value.trim();
+            // Your API key is placed directly here.
+            const apiKey = "AIzaSyAC2yR0vzb-5AZ2P_n8TQ7DaTkNs2tY9Dw";
             
-            if (!apiKey) {
-                errorMessageEl.classList.remove('hidden');
-                errorMessageEl.querySelector('span').textContent = ' Please enter and save your Gemini API Key first.';
-                return;
-            }
-
+            const customerQuestion = customerQuestionEl.value.trim();
+            
             if (customerQuestion) {
                 getRecommendations(customerQuestion, apiKey);
             } else {
@@ -312,10 +283,6 @@
             }
         });
 
-        // Load saved API key on page load
-        document.addEventListener('DOMContentLoaded', loadApiKey);
-
     </script>
 </body>
 </html>
-
