@@ -45,17 +45,17 @@
         <div class="bg-white rounded-2xl shadow-lg p-6 md:p-10">
             <header class="text-center mb-8">
                 <h1 class="text-3xl md:text-4xl font-bold text-gray-900">Advocate AI Prompt Assistant</h1>
-                <p class="text-gray-600 mt-2">Paste the customer's message below to get the best AI prompt recipe. Please ensure there is PII or PHI in our submission.</p>
+                <p class="text-gray-600 mt-2">Paste the customer's message below to get the best AI prompt recipe.</p>
             </header>
 
             <main>
                 <div class="mb-6">
                     <label for="customer-question" class="block text-sm font-medium text-gray-700 mb-2">Customer's Message</label>
-                    <textarea id="customer-question" rows="6" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-shadow" placeholder="e.g., 'Why was I charged twice this month? My bill is higher than usual and I don't understand the new fee...'"></textarea>
+                    <textarea id="customer-question" rows="6" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0A8080] focus:border-[#0A8080] transition-shadow" placeholder="e.g., 'Why was I charged twice this month? My bill is higher than usual and I don't understand the new fee...'"></textarea>
                 </div>
 
                 <div class="text-center">
-                    <button id="get-prompt-btn" class="bg-indigo-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-300 transition-transform transform hover:scale-105">
+                    <button id="get-prompt-btn" class="bg-[#0A8080] text-white font-semibold py-3 px-8 rounded-lg hover:bg-[#086666] focus:outline-none focus:ring-4 focus:ring-[#68c7c7] transition-transform transform hover:scale-105">
                         Find the Right Prompt
                     </button>
                 </div>
@@ -63,7 +63,7 @@
                 <div id="results-container" class="mt-10 prose">
                     <!-- Loading indicator will be shown here -->
                     <div id="loading" class="text-center hidden">
-                        <svg class="animate-spin h-8 w-8 text-indigo-600 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <svg class="animate-spin h-8 w-8 text-[#0A8080] mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
