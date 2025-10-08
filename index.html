@@ -128,67 +128,84 @@
 
         // This is the playbook content from the user's document.
         const playbookContent = `
+            Tier 1 Advocate: AI Interaction Recipes & Best Practices
+            Introduction
+            This document is the central playbook for Tier 1 Advocates using our internal AI assistant. It contains a library of "Interaction Recipes"—structured prompts designed for common customer scenarios—and "Best Practices" for effective communication. Use this guide by asking our assistant questions like, "What's the best way to handle an angry customer?”.
+            Core Principles for AI Interaction
+            Advocate Mission
+            To resolve Tier 1 in-scope issues quickly and clearly, guide customers to self-serve where possible, and transfer out-of-scope cases cleanly with strong context to reduce customer effort.
+            Advocate Style
+            Calm, concise, friendly, and transparent; sets expectations and avoids internal jargon with customers.
+            All AI-generated responses should embody this mission and style.
             Section 1: Understanding & Diagnosing the Issue
             Goal: To use AI to quickly grasp the full context of a customer's problem before responding.
-            
             Recipe: Summarize a Long Conversation
-            - When to Use: When a ticket has a long email chain or chat transcript that you are taking over.
-            - Goal: To get a quick, unbiased summary of the issue, what's been tried, and the customer's current emotional state.
-            - Ready-to-Use Prompt:
-              Persona: Act as a senior support specialist reviewing a case file.
+            When to Use:  When a ticket has a long email chain or chat transcript that you are taking over.
+            Goal:  To get a quick, unbiased summary of the issue, what's been tried, and the customer's current emotional state.
+            Ready-to-Use Prompt:
               Context: [Paste the entire email chain or chat history here.]
-              Task: Analyze the conversation above and provide a brief, neutral summary. I need to understand: What is the customer's primary, unresolved problem? What solutions or troubleshooting steps have already been attempted? What is the customer's current sentiment (e.g., frustrated, confused, calm)?
+              Task: Analyze the conversation above and provide a brief, neutral summary. I need to understand:
+              What is the customer's primary, unresolved problem?
+              What solutions or troubleshooting steps have already been attempted?
+              What is the customer's current sentiment (e.g., frustrated, confused, calm)?
               Constraints: Keep the summary under 150 words. Use a bulleted list for clarity.
-
             Recipe: Extract Key Information from a Vague Message
-            - When to Use: When a customer sends a long, rambling, or unclear message.
-            - Goal: To distill the core issue and identify specific, actionable details needed for troubleshooting.
-            - Ready-to-Use Prompt:
-              Persona: Act as a detail-oriented technical analyst.
-              Context: A customer has sent the following message: [Paste customer's message here.]
-              Task: Read the message and extract the essential information. Identify the core problem the customer is facing. List any specific error messages, product names, or account details mentioned. Create a list of clarifying questions to ask the customer to get the information we need to solve this.
-              Constraints: Format the output as three distinct sections: "Core Problem," "Key Details," and "Clarifying Questions."
-
-            Section 2: Crafting a Clear & Empathetic Response
-            Goal: To use AI to draft responses that are accurate, clear, and emotionally intelligent.
-
+            When to Use:  When a customer sends a long, rambling message with critical details hidden inside.
+            Goal:  To pull out only the actionable details needed to start working on the ticket.
+            Ready-to-Use Prompt:
+              Context: [Paste customer's message here.]
+              Task: Review the customer's message and extract the following key information into a simple list. If any information is missing, note that.
+              Customer Name:
+              Account ID or Email:
+              Specific Error Message or Issue Description:
+              Product or Service Mentioned:
+              Date the Issue Started:
+              Constraints: Be precise. Do not infer information that is not explicitly stated.
+            Section 2: Brainstorming & Troubleshooting
+            Goal: To use AI as a technical partner to explore solutions beyond standard knowledge base articles.
+            Recipe: Generate a Troubleshooting Checklist
+            When to Use:  A customer reports a common but vague problem like "it's not working" or "the app is slow."
+            Goal:  To generate a logical, step-by-step series of questions to ask the customer to diagnose the issue methodically.
+            Ready-to-Use Prompt:
+              Context:  A customer is reporting that our [Product Name] Is [Vague Description of Problem]. They have not provided any other details.
+              Task: Create a prioritized, step-by-step troubleshooting checklist. Frame it as a series of simple questions I can ask the customer to narrow down the potential cause. Start with the most common and simple fixes first.
+              Constraints: The questions must be easy for a non-technical customer to understand and answer. Limit the list to the top 5 most likely diagnostic questions.
+            Recipe: Kickstart a Technical Investigation
+            When to Use:  When a customer reports a complex or unknown technical issue that isn't covered by a standard checklist (e.g., "Data is missing from my report," "A feature is behaving unexpectedly").
+            Goal:  To generate targeted questions for both the customer and for internal investigation, helping the advocate gather the necessary information to solve or escalate the case effectively.
+            Ready-to-Use Prompt:
+              Context:  A customer is experiencing the following issue: [Paste detailed description of the issue here.]
+              Task: Act as a senior technical investigator. Generate two separate lists of leading questions to help me begin my investigation:
+              1. Customer-Facing Questions:  A short list of simple, open-ended questions I can ask the customer to get more context about their experience (e.g., when it started, what they were doing, the impact on them).
+              2. Internal Investigation Questions:  A list of initial steps and questions for me to check on my own (e.g., "Check the user's account flags," "Look for similar reports from other users," "Review server logs for the user around the time of the incident").
+              Constraints:  Questions should be designed to gather information, not to suggest immediate solutions.
+            Section 3: Improving Communication
+            Goal: To refine messaging for clarity, empathy, and tone.
+            Best Practice: The A.V.A. Method (Acknowledge, Validate, Act)
+            - Acknowledge:  Directly mention the customer's issue and emotion. ("I understand you're frustrated with the unexpected charge.")
+            - Validate:  Confirm that their feelings are reasonable. ("It's completely valid to be concerned when your bill is higher than expected.")
+            - Act:  Clearly state what you are going to do next. ("I'm going to look into the details of this charge for you right now.")
+            Recipe: Enhance Empathy and Tone
+            When to Use:  You have a factual, direct draft, but you need to soften the tone for a frustrated or sensitive customer.
+            Goal:  To revise a message to make it more empathetic and reassuring without changing the core facts.
+            Ready-to-Use Prompt:
+              Context:  I need to deliver a difficult message to a frustrated customer. Here is my current draft: [Paste your draft here.]
+              Task: Please review and rewrite my draft. First, briefly summarize the customer's issue to show you understand. Then, revise the message to make it more empathetic and reassuring using the "Acknowledge, Validate, Act" method. Explain the changes you made and why.
+              Constraints: Do not change the fundamental outcome or promise something we cannot do.
             Recipe: Simplify Technical Language
-            - When to Use: When you need to explain a complex technical concept to a non-technical customer.
-            - Goal: To translate jargon into a simple, easy-to-understand analogy or explanation.
-            - Ready-to-Use Prompt:
-              Persona: Act as a friendly technology educator who is great at making complex topics simple.
-              Context: I need to explain the concept of [insert technical concept, e.g., "clearing browser cache," "IP address," "two-factor authentication"] to a customer who is not tech-savvy.
-              Task: Write a simple, one-paragraph explanation of this concept. Use a relatable analogy to make it easier to understand.
-              Constraints: Avoid all technical jargon. Keep the explanation under 100 words.
-
-            Recipe: Adopt a Specific Tone
-            - When to Use: When dealing with a customer who is clearly angry, frustrated, or anxious and you need to match their emotional state with the appropriate tone.
-            - Goal: To generate a response that de-escalates tension and shows empathy.
-            - Ready-to-Use Prompt:
-              Persona: Act as an expert in empathetic communication and customer service de-escalation. Your tone should be [choose one: calm, reassuring, apologetic, confident].
-              Context: A customer is very [e.g., angry, worried] about [summarize the issue].
-              Task: Rewrite the following draft response to have a more [chosen tone] and empathetic tone. My draft is: "[Paste your draft response here.]"
-              Constraints: Focus only on improving the tone; do not change the core factual information.
-
-            Section 3: Common Customer Scenarios
-            Goal: To provide ready-to-use prompts for the most frequent customer issues.
-
-            Recipe: Explain a Billing Charge
-            - When to Use: A customer is questioning a specific charge or the total amount of their bill.
-            - Goal: To clearly explain the charge, reassure the customer, and build trust.
-            - Ready-to-Use Prompt:
-              Persona: Act as a helpful and patient billing specialist named Alex. Your tone should be reassuring and professional.
-              Context: A customer is confused and concerned about a charge on their bill. [Paste customer's question and relevant billing line items here.]
-              Task: Draft a clear, empathetic email reply to the customer. Use the A.V.A. method to first acknowledge their confusion. Then, identify the specific charge and explain what it is for in simple terms.
-              Constraints: Keep the explanation concise (under 150 words). Do not offer a discount or refund unless it's a clear error. End by asking if the explanation is clear.
-
+            When to Use:  You need to explain a technical concept (e.g., API failure, server error) to a non-technical customer.
+            Goal:  To translate internal jargon into a simple, clear, and honest explanation.
+            Ready-to-Use Prompt:
+              Context:  I need to explain the following technical situation to a customer: [Paste the technical details here.]
+              Task: Rewrite this explanation in simple, everyday language. Avoid all technical jargon. Using a simple analogy is highly encouraged.
+              Constraints: The explanation must remain accurate and honest.
+            Section 4: Responding to Common Scenarios
             Recipe: Handle a Service Outage
-            - When to Use: A customer is reporting, or is impacted by, a known service outage.
-            - Goal: To provide a sincere apology, offer reassurance, and set clear expectations for follow-up.
-            - Ready-to-Use Prompt:
-              Persona: Act as a calm, professional, and highly empathetic support specialist.
-              Context: The customer is impacted by our current service outage. They are [mention their sentiment, e.g., "frustrated," "concerned"].
-              Task: Draft a concise and sincere apology. Validate their frustration and confirm that we are aware of a major outage. State that our team's top priority is fixing it. Do not make excuses. State that you will personally provide them with an update as soon as you have one.
+            When to Use:  A customer is reporting, or is impacted by, a known service outage.
+            Goal:  To provide a sincere apology, offer reassurance, and set clear expectations for follow-up.
+            Ready-to-Use Prompt:
+              Context:  The customer is impacted by our current service outage. They are [mention their sentiment, e.g., "frustrated," "concerned"].
+              Task: Draft a concise and sincere apology. Start by summarizing their situation and validating their frustration (e.g., "I understand you're frustrated by the service outage, especially since it's impacting your business."). Then, confirm we are aware of the issue and that our team's top priority is fixing it. State that you will personally provide them with an update as soon as you have one.
               Constraints: Keep the message under 100 words. Do not promise a specific time-to-fix.
         `;
         
